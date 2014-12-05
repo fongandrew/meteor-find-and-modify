@@ -26,9 +26,12 @@ Usage
     TestCollection.findAndModify({
       query: {name: "Robin"},
       sort: {age: -1},
+      skip: 2,  // available only client side
       remove: true
     });
 
+See mongo documentation for arguments details:
+http://docs.mongodb.org/manual/reference/method/db.collection.findAndModify/
 
 License
 ------- 
