@@ -144,7 +144,7 @@
                               favoriteColor: "red" });
       return TestCollection.findAndModify({
         query: {name: {$exists: true}},
-        sort: [["name", "desc"]],
+        sort: {name: -1},
         update: {$set: {name: "Clark Kent"}},
         new: true
       });
