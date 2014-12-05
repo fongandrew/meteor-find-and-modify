@@ -181,4 +181,26 @@
       test.equal(result.batman, undefined);
     });
 
+
+  addTest("findAndModify - fields",
+    function() {
+      TestCollection.remove({});
+      var batmanId = TestCollection.insert({ name: "Batman",
+                                             favoriteColor: "black" });
+      var supermanId = TestCollection.insert({ name: "Superman",
+                                               favoriteColor: "blue" });
+
+      return TestCollection.findAndModify({
+        query: {name: "Batman"},
+        update: {$set: {name: "Bruce Wayne"}},
+        fields: {
+          favoriteColor: 0
+        }
+      });
+    },
+    function(test, result) {
+      test.equal(result.name, "Batman");
+      test.equal(result.favoriteColor, undefined);
+    });
+
 })();

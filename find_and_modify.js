@@ -36,6 +36,8 @@
         q.options.remove = args.remove;
       if (args.upsert !== undefined)
         q.options.upsert = args.upsert;
+      if (args.fields !== undefined)
+        q.options.fields = args.fields;
 
       var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
       var collectionObj = db.collection(this._name);
@@ -58,6 +60,8 @@
       var findOptions = {};
       if (args.sort !== undefined)
         findOptions.sort = args.sort;
+      if (args.fields !== undefined)
+        findOptions.fields = args.fields;
       if (args.skip !== undefined)
         findOptions.skip = args.skip;
 
