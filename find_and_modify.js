@@ -20,7 +20,7 @@
   };
 
   if (Meteor.isServer) {
-    Meteor.Collection.prototype.findAndModify = function(args){
+    Mongo.Collection.prototype.findAndModify = function(args){
       validate(this, args);
 
       var q = {};
@@ -54,7 +54,7 @@
   }
 
   if (Meteor.isClient) {
-    Meteor.Collection.prototype.findAndModify = function(args) {
+    Mongo.Collection.prototype.findAndModify = function(args) {
       validate(this, args);
 
       var findOptions = {};

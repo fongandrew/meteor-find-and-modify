@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var TestCollection = new Meteor.Collection("findAndModifyTestCol");
+  var TestCollection = new Mongo.Collection("findAndModifyTestCol");
   if (Meteor.isServer) {
     TestCollection.remove({});
     TestCollection.allow({
