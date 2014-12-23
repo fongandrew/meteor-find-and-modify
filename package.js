@@ -1,7 +1,7 @@
 Package.describe({
   name: 'fongandrew:find-and-modify',
   summary: 'findAndModify implementation for Meteor collection',
-  version: '0.1.0',
+  version: '0.1.1',
   git: 'https://github.com/fongandrew/meteor-find-and-modify.git'
 });
 
