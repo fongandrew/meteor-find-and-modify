@@ -203,4 +203,34 @@
       test.equal(result.favoriteColor, undefined);
     });
 
+
+  addTest("findAndModify - positional operators",
+    function() {
+      TestCollection.remove({});
+      var justiceLeague = TestCollection.insert({
+        heroes: [
+          { name: "Batman", favoriteColor: "black"},
+          { name: "Superman", favoriteColor: "blue"},
+          { name: "Wonder Woman", favoriteColor: "red"},
+        ]
+      });
+      var avengers = TestCollection.insert({
+        heroes: [
+          { name: "Iron Man", favoriteColor: "gold"},
+          { name: "Hulk", favoriteColor: "green"},
+          { name: "Captain America", favoriteColor: "blue"}
+        ]
+      });
+
+      return TestCollection.findAndModify({
+        query: {"heroes.name": "Batman"},
+        update: {$set: {"heroes.$.favoriteColor": "darkness"}},
+        new: true
+      });
+    },
+    function(test, result) {
+      test.equal(result.heroes[0].name, "Batman");
+      test.equal(result.heroes[0].favoriteColor, "darkness");
+    });
+
 })();

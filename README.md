@@ -33,6 +33,19 @@ Usage
 See mongo documentation for arguments details:
 http://docs.mongodb.org/manual/reference/method/db.collection.findAndModify/
 
+
+Known Issues
+------------
+
+The client-side code (and the tests for the client-side code) works on the 
+assumption that is running in a Meteor method simulation. If run outside of a 
+simulation, the client-side code will use an `_id` selector in lieu of your
+original query to get around Meteor's restriction on `_id` only updates
+for untrusted (client) code. This may result in unusual errors or behavior if
+your modifier is dependent on your query selector (e.g. as with positional
+operators).
+
+
 License
 ------- 
 

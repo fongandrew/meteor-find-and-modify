@@ -81,7 +81,31 @@
         }
 
         else if (ret) {
-          this.update({_id: ret._id}, args.update);
+
+          // If we're in a simulation, it's safe to call update with normal
+          // selectors (which is needed, e.g., for modifiers with positional
+          // operators). Otherwise, we'll have to do an _id only update to
+          // get around the restriction that lets untrusted (e.g. client)
+          // code update collections by _id only.
+          var enclosing = DDP._CurrentInvocation.get();
+          var alreadyInSimulation = enclosing && enclosing.isSimulation;
+          if (alreadyInSimulation) {
+            // Add _id to query because Meteor's update doesn't include certain
+            // options that the full findAndModify does (like sort). Create
+            // shallow copy before update so as not to mess with user's
+            // original query object
+            var updatedQuery = {};
+            for (var prop in args.query) {
+              updatedQuery[prop] = args.query[prop];
+            }
+            updatedQuery._id = ret._id;
+            this.update(updatedQuery, args.update);
+          }
+
+          else {
+            this.update({_id: ret._id}, args.update);
+          }
+          
           if (args.new)
             return this.findOne({_id: ret._id}, findOptions);
         }
