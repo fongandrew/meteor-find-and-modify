@@ -45,6 +45,8 @@ for untrusted (client) code. This may result in unusual errors or behavior if
 your modifier is dependent on your query selector (e.g. as with positional
 operators).
 
+Upserting will result in ObjectIDs being used rather than string IDs. See https://github.com/fongandrew/meteor-find-and-modify/issues/4.
+
 
 License
 ------- 
