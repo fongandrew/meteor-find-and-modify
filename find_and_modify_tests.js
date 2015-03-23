@@ -112,6 +112,23 @@
     });
 
 
+  addTest("findAndModify - upsert when doesn't exist (force str ID)",
+    function() {
+      TestCollection.remove({});
+      return TestCollection.findAndModify({
+        query: {name: "Batman"},
+        update: {$set: {name: "Bruce Wayne"}},
+        new: true,
+        upsert: true
+      });
+    },
+    function(test, result) {
+      test.equal(result.name, "Bruce Wayne");
+      test.equal(result.favoriteColor, undefined);
+      test.equal(typeof(result._id), "string");
+    });
+
+
   addTest("findAndModify - upsert when already exists",
     function() {
       TestCollection.remove({});

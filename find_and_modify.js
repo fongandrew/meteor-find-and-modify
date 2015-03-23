@@ -39,6 +39,13 @@
       if (args.fields !== undefined)
         q.options.fields = args.fields;
 
+      // If upsert, assign a string Id to $setOnInsert unless otherwise provided
+      if (q.options.upsert) {
+        q.update = q.update || {};
+        q.update.$setOnInsert = q.update.$setOnInsert || {};
+        q.update.$setOnInsert._id = q.update.$setOnInsert._id || Random.id(17);
+      } 
+
       var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
       var collectionObj = db.collection(this._name);
 

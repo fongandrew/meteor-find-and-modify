@@ -45,7 +45,10 @@ for untrusted (client) code. This may result in unusual errors or behavior if
 your modifier is dependent on your query selector (e.g. as with positional
 operators).
 
-Upserting will result in ObjectIDs being used rather than string IDs. See https://github.com/fongandrew/meteor-find-and-modify/issues/4.
+For consistency with Meteor's default behavior, upserts using findAndModify 
+use _ids consisting of a 17 character string rather than an ObjectId. This
+behavior has only been tested with Mongo 2.6+ and may result in issues with
+Mongo 2.4.x.
 
 
 License
