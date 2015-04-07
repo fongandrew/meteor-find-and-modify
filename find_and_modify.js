@@ -46,8 +46,8 @@
         q.update.$setOnInsert._id = q.update.$setOnInsert._id || Random.id(17);
       } 
 
-      var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
-      var collectionObj = db.collection(this._name);
+      // Use rawCollection object introduced in Meteor 1.0.4.
+      var collectionObj = this.rawCollection();
 
       var wrappedFunc = Meteor.wrapAsync(collectionObj.findAndModify, 
                                          collectionObj);

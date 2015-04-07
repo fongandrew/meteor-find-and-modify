@@ -1,3 +1,7 @@
+## v.0.2.1
+
+* Update to use the `rawCollection` method introduced in Meteor 1.0.4.
+
 ## v.0.2.0
 
 * upserts now use a string _id of 17 random characters for consistency with
