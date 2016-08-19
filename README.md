@@ -1,7 +1,10 @@
 FindAndModify
 =============
 
-This Meteor package adds [findAndModify](http://docs.mongodb.org/v2.4/reference/command/findAndModify/) support to Meteor's MongoDB Collections. It should work on both the server and client. It adapts 
+**NB: This package isn't actively maintained.** It works with MongoDB v2.6, and probably works with later versions
+of Mongo as well, although this hasn't been tested.
+
+This Meteor package adds [findAndModify](http://docs.mongodb.org/v2.6/reference/command/findAndModify/) support to Meteor's MongoDB Collections. It should work on both the server and client. It adapts 
 and cleans up some code found on https://github.com/meteor/meteor/issues/1070.
 
 
