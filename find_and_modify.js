@@ -20,12 +20,12 @@
   };
 
   if (Meteor.isServer) {
-    Mongo.Collection.prototype.findAndModify = function(args){
+    Mongo.Collection.prototype.findAndModify = function(args,rawResult){
       validate(this, args);
 
       var q = {};
       q.query = args.query || {};
-      q.sort = args.sort || {};
+      q.sort = args.sort || [];
       if (args.update)
         q.update = args.update;
 
@@ -38,6 +38,12 @@
         q.options.upsert = args.upsert;
       if (args.fields !== undefined)
         q.options.fields = args.fields;
+      if (args.writeConcern !== undefined)
+        q.options.w = args.writeConcern;
+      if (args.maxTimeMS !== undefined)
+        q.options.wtimeout = args.maxTimeMS;
+      if (args.bypassDocumentValidation != undefined)
+        q.options.bypassDocumentValidation = args.bypassDocumentValidation;
 
       // If upsert, assign a string Id to $setOnInsert unless otherwise provided
       if (q.options.upsert) {
@@ -51,12 +57,13 @@
 
       var wrappedFunc = Meteor.wrapAsync(collectionObj.findAndModify, 
                                          collectionObj);
-      return wrappedFunc(
-        q.query,
-        q.sort,
-        q.update,
-        q.options
-      );
+      var result = wrappedFunc(
+                q.query,
+                q.sort,
+                q.update,
+                q.options
+            );
+      return rawResult? result : result.value;
     };
   }
 
