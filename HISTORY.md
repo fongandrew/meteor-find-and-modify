@@ -1,3 +1,8 @@
+## v.1.0.0
+
+* Fix for compatability with Meteor 1.4.x. Supports writeConcern.
+  Thanks to @tcastelli.
+
 ## v.0.2.1
 
 * Update to use the `rawCollection` method introduced in Meteor 1.0.4.
